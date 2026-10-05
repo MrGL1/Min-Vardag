@@ -1,9 +1,27 @@
-import { View, Text } from "react-native";
+import { View, Text, FlatList, Pressable } from "react-native";
+import { router } from "expo-router";
 
 export default function Sysslor() {
+    const sysslor = ["Städa", "Träna", "Plugga"]
     return (
         <View>
             <Text>Mina sysslor!</Text>
+            <FlatList
+                data={sysslor}
+                renderItem={({ item }) => {
+                    return (
+
+                        <Pressable onPress={() => {
+                            return router.push({
+                                pathname: "/detaljer/[id]",
+                                params: { id: item }
+                            });
+                        }}>
+                            <Text>{item}</Text>
+                        </Pressable>
+                    );
+                }}
+            />
         </View>
     );
 }
