@@ -7,20 +7,29 @@ export default function HomeScreen() {
   return (
     <View style={s.root}>
       <Text style={s.title}>Min Vardag </Text>
-      <Text>{syssla}</Text>
-      <Text>{datum}</Text>
-      <Text>{tid}</Text>
 
-      <Pressable onPress={() => {
-        router.push("/sysslor");
-      }}>
+      {syssla && (
+        <View style={s.scheduleCard} >
+          <Text style={s.activity}>{syssla}</Text>
+          <Text>Datum: {datum}</Text>
+          <Text>Tid: {tid}</Text>
+        </View>
+      )}
+
+      <Pressable
+        style={s.button}
+        onPress={() => {
+          router.push("/sysslor");
+        }}>
 
         <Text> Sysslor </Text>
       </Pressable>
 
-      <Pressable onPress={() => {
-        router.push("/lagg-till");
-      }}>
+      <Pressable
+        style={s.button}
+        onPress={() => {
+          router.push("/lagg-till");
+        }}>
         <Text>Lägg till syssla</Text>
       </Pressable>
     </View>
@@ -32,10 +41,29 @@ const s = StyleSheet.create({
     flex: 1,
     padding: 24,
   },
+
   title: {
     fontSize: 32,
     fontWeight: "bold",
     marginBottom: 20,
+  },
+
+  scheduleCard: {
+    borderWidth: 1,
+    padding: 16,
+    borderRadius: 8,
+    marginBottom: 20,
+  },
+
+  activity: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+
+  button: {
+    borderWidth: 1,
+    padding: 12,
+    borderRadius: 8,
   },
 
 })
