@@ -12,26 +12,29 @@ export default function LaggTill() {
 
         <View style={s.root}>
             <Text style={s.title}>
-                Lägg till syssla
+                Lägg till aktivitet
             </Text>
 
             <TextInput
                 style={s.input}
                 value={syssla}
-                placeholder="Syssla"
+                placeholder="Aktivitet"
+                placeholderTextColor="gray"
                 onChangeText={setSyssla} />
 
             <TextInput
                 style={s.input}
-                placeholder="Datum"
                 value={datum}
+                placeholder="Datum"
+                placeholderTextColor="gray"
                 onChangeText={setDatum}
             />
 
             <TextInput
                 style={s.input}
-                placeholder="Tid"
                 value={tid}
+                placeholder="Tid"
+                placeholderTextColor="gray"
                 onChangeText={setTid}
             />
 

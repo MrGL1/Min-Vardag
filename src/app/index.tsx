@@ -6,7 +6,7 @@ export default function HomeScreen() {
 
   return (
     <View style={s.root}>
-      <Text style={s.title}>Min Vardag </Text>
+      <Text style={s.title}>Mitt schema </Text>
 
       {syssla && (
         <View style={s.scheduleCard} >
@@ -16,21 +16,14 @@ export default function HomeScreen() {
         </View>
       )}
 
-      <Pressable
-        style={s.button}
-        onPress={() => {
-          router.push("/sysslor");
-        }}>
 
-        <Text> Sysslor </Text>
-      </Pressable>
 
       <Pressable
         style={s.button}
         onPress={() => {
           router.push("/lagg-till");
         }}>
-        <Text>Lägg till syssla</Text>
+        <Text>Lägg till Aktivitet</Text>
       </Pressable>
     </View>
   );
