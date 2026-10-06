@@ -1,56 +1,110 @@
-# Welcome to your Expo app 👋
+# Min Vardag
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Min Vardag är en mobilapp skapad med React Native, Expo och TypeScript.
 
-## Get started
+Appen hjälper användaren att planera sin vardag genom att lägga till en syssla med datum och tid. Användaren kan även välja mellan olika typer av sysslor och öppna en detaljsida för en vald syssla.
 
-1. Install dependencies
+## Funktioner
 
-   ```bash
-   npm install
-   ```
+- Lägg till en syssla.
+- Ange datum för sysslan.
+- Ange tid för sysslan.
+- Visa den tillagda sysslan i ett enkelt schema.
+- Visa olika sysslor, exempelvis Städa, Träna, Plugga och Promenad.
+- Navigera mellan olika sidor med Expo Router.
+- Öppna en detaljsida för en vald syssla.
+- Hämta användarens position.
+- Kopiera namnet på en syssla.
+- Visa enhetens batterinivå.
+- Ge haptisk feedback vid interaktion.
 
-2. Start the app
+## Teknik
 
-   ```bash
-   npx expo start
-   ```
+Projektet är byggt med:
 
-In the output, you'll find options to open the app in a
+- React Native
+- Expo
+- TypeScript
+- Expo Router
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## React Native-komponenter
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+I projektet används bland annat följande React Native-komponenter:
 
-## Get a fresh project
+- `View`
+- `Text`
+- `Pressable`
+- `TextInput`
+- `FlatList`
 
-When you're ready, run:
+## Expo SDK-moduler
+
+Projektet använder följande Expo SDK-moduler:
+
+### Expo Haptics
+
+`expo-haptics` används för att ge haptisk feedback när användaren interagerar med appen.
+
+### Expo Location
+
+`expo-location` används för att fråga efter platsbehörighet och hämta användarens aktuella position.
+
+### Expo Clipboard
+
+`expo-clipboard` används för att kopiera namnet på en vald syssla.
+
+### Expo Battery
+
+`expo-battery` används för att hämta enhetens aktuella batterinivå.
+
+## Navigering
+
+Appen använder Expo Router för navigering.
+
+Exempel på sidor i appen:
+
+- `/` – startsidan med schemat.
+- `/sysslor` – visar en lista med sysslor.
+- `/lagg-till` – formulär för att lägga till en syssla.
+- `/detaljer/[id]` – dynamisk detaljsida för en vald syssla.
+
+Den dynamiska routen `[id]` används för att skicka information om vilken syssla användaren har valt.
+
+## Installation
+
+Klona projektet och installera dependencies:
 
 ```bash
-npm run reset-project
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Starta sedan Expo:
 
-### Other setup steps
+```bash
+npx expo start
+```
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+Appen kan därefter köras med exempelvis Expo Go eller i webbläsaren.
 
-## Learn more
+## Projektstruktur
 
-To learn more about developing your project with Expo, look at the following resources:
+De viktigaste sidorna finns i:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```text
+src/app/
+```
 
-## Join the community
+Exempel:
 
-Join our community of developers creating universal apps.
+```text
+src/app/
+├── index.tsx
+├── lagg-till.tsx
+├── sysslor.tsx
+└── detaljer/
+    └── [id].tsx
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Syfte
+
+Syftet med projektet är att skapa en enkel vardagsapp där användaren kan planera aktiviteter och samtidigt använda centrala delar av React Native och Expo, såsom komponenter, state, navigering, dynamiska routes och Expo SDK-moduler.
