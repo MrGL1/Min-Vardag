@@ -3,6 +3,7 @@ import { useState } from "react";
 import { router } from "expo-router";
 import * as Notifications from "expo-notifications";
 import * as Haptics from "expo-haptics";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
@@ -66,14 +67,27 @@ export default function LaggTill() {
                             seconds: 5,
                         },
                     });
-                    router.push({
-                        pathname: "/",
-                        params: {
-                            syssla: syssla,
-                            datum: datum,
-                            tid: tid
-                        }
-                    });
+
+                    const sparade = await AsyncStorage.getItem("aktiviteter");
+
+                    const aktiviteter = sparade
+                        ? JSON.parse(sparade)
+                        : [];
+
+                    const nyAktivitet = {
+                        aktivitet: syssla,
+                        datum: datum,
+                        tid: tid,
+                    };
+
+                    aktiviteter.push(nyAktivitet);
+
+                    await AsyncStorage.setItem(
+                        "aktiviteter",
+                        JSON.stringify(aktiviteter)
+                    );
+
+                    router.replace("/");
                 }}>
                 <Text>
                     Lägg till

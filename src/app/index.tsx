@@ -1,47 +1,78 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Clipboard from "expo-clipboard";
 import * as ScreenOrientation from "expo-screen-orientation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
+type Aktivitet = {
+  aktivitet: string;
+  datum: string;
+  tid: string;
+};
 
 export default function HomeScreen() {
-  const { syssla, datum, tid } = useLocalSearchParams();
+  const [aktiviteter, setAktiviteter] = useState<Aktivitet[]>([]);
+
+  const hamtaAktiviteter = async () => {
+    const sparade = await AsyncStorage.getItem("aktiviteter");
+    if (sparade) {
+      setAktiviteter(JSON.parse(sparade));
+    }
+  };
 
   useEffect(() => {
     ScreenOrientation.lockAsync(
       ScreenOrientation.OrientationLock.PORTRAIT_UP
     );
+    hamtaAktiviteter();
   }, []);
+
+
 
   return (
     <View style={s.root}>
+
       <Text style={s.title}>Mitt schema </Text>
 
-      {syssla && (
-        <View style={s.scheduleCard} >
-          <Text style={s.activity}>{syssla}</Text>
-          <Text>Datum: {datum}</Text>
-          <Text>Tid: {tid}</Text>
+      {aktiviteter.map((item, index) => (
+        <View key={index} style={s.scheduleCard} >
+          <Text style={s.activity}>{item.aktivitet}</Text>
+          <Text>Datum: {item.datum}</Text>
+          <Text>Tid: {item.tid}</Text>
 
           <Pressable onPress={() => {
-            Clipboard.setStringAsync(syssla as string);
+            Clipboard.setStringAsync(item.aktivitet);
           }}>
             <Text>Kopiera aktivitet</Text>
           </Pressable>
+
+
+          <Pressable onPress={async () => {
+            const nyaAktiviteter = aktiviteter.filter((_, i) => i !== index);
+
+            setAktiviteter(nyaAktiviteter);
+
+            await AsyncStorage.setItem(
+              "aktiviteter",
+              JSON.stringify(nyaAktiviteter)
+            );
+          }}>
+            <Text>Ta bort</Text>
+          </Pressable>
         </View>
-      )}
+      ))}
 
 
 
-      <Pressable
+      < Pressable
         style={s.button}
         onPress={() => {
           router.push("/lagg-till");
         }}>
         <Text>Lägg till Aktivitet</Text>
       </Pressable>
-    </View>
+    </View >
   );
 }
 
