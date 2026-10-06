@@ -10,12 +10,11 @@ Appen hjälper användaren att planera sin vardag genom att lägga till aktivite
 - Ange datum för aktiviteten.
 - Ange tid för aktiviteten.
 - Visa den tillagda aktiviteten i ett enkelt schema.
-- Navigera mellan olika sidor med Expo Router.
-- Visa en detaljsida för aktiviteter.
-- Hämta användarens position.
+- Få en påminnelse genom en lokal notis.
+- Få haptisk feedback när en aktivitet läggs till.
 - Kopiera namnet på en aktivitet.
-- Visa enhetens batterinivå.
-- Ge haptisk feedback vid interaktion.
+- Appen hålls i stående skärmläge.
+- Navigera mellan startsidan och formuläret med Expo Router.
 
 ## Teknik
 
@@ -34,40 +33,39 @@ I projektet används bland annat följande React Native-komponenter:
 - `Text`
 - `Pressable`
 - `TextInput`
-- `FlatList`
 
 ## Expo SDK-moduler
 
 Projektet använder fyra Expo SDK-moduler.
 
+### Expo Notifications
+
+`expo-notifications` används för att skicka en lokal påminnelse när användaren har lagt till en aktivitet.
+
+I den nuvarande versionen skickas påminnelsen några sekunder efter att aktiviteten har lagts till.
+
 ### Expo Haptics
 
-`expo-haptics` används för att ge haptisk feedback när användaren interagerar med appen.
-
-### Expo Location
-
-`expo-location` används för att fråga efter platsbehörighet och hämta användarens aktuella position.
+`expo-haptics` används för att ge haptisk feedback när användaren trycker på knappen för att lägga till en aktivitet.
 
 ### Expo Clipboard
 
-`expo-clipboard` används för att kopiera namnet på en aktivitet.
+`expo-clipboard` används för att kopiera namnet på en aktivitet till enhetens urklipp.
 
-### Expo Battery
+### Expo Screen Orientation
 
-`expo-battery` används för att hämta enhetens aktuella batterinivå.
+`expo-screen-orientation` används för att hålla appen i stående skärmläge.
 
 ## Navigering
 
-Appen använder Expo Router för navigering mellan olika sidor.
+Appen använder Expo Router för navigering mellan sidorna.
 
-Exempel på routes som finns i projektet:
+Projektet har två huvudsakliga routes:
 
 - `/` – startsidan där användarens schema visas.
-- `/lagg-till` – formulär där användaren kan lägga till en aktivitet med datum och tid.
-- `/sysslor` – sida med aktiviteter som skapades under utvecklingen av appen.
-- `/detaljer/[id]` – dynamisk detaljsida där information skickas med hjälp av en parameter.
+- `/lagg-till` – formuläret där användaren skriver aktivitet, datum och tid.
 
-Den dynamiska routen `[id]` används för att läsa en parameter med `useLocalSearchParams`.
+När användaren lägger till en aktivitet skickas informationen tillbaka till startsidan och visas i schemat.
 
 ## Installation
 
@@ -85,6 +83,8 @@ npx expo start
 
 Appen kan därefter köras på en mobil enhet med Expo Go eller i webbläsaren.
 
+Vissa mobilfunktioner, exempelvis haptisk feedback och notiser, testas bäst på en fysisk mobil enhet.
+
 ## Projektstruktur
 
 De viktigaste sidorna finns i:
@@ -98,14 +98,15 @@ Exempel:
 ```text
 src/app/
 ├── index.tsx
-├── lagg-till.tsx
-├── sysslor.tsx
-└── detaljer/
-    └── [id].tsx
+└── lagg-till.tsx
 ```
+
+`index.tsx` innehåller startsidan och schemat.
+
+`lagg-till.tsx` innehåller formuläret där användaren kan lägga till en ny aktivitet.
 
 ## Syfte
 
 Syftet med Min Vardag är att skapa en enkel app som hjälper användaren att strukturera sin vardag och komma ihåg planerade aktiviteter.
 
-Projektet visar samtidigt användning av centrala delar av React Native och Expo, bland annat komponenter, `useState`, formulär, navigering, parametrar, dynamiska routes och Expo SDK-moduler.
+Projektet visar samtidigt användning av centrala delar av React Native och Expo, bland annat komponenter, `useState`, formulär, navigering och Expo SDK-moduler.
