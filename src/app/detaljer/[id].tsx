@@ -1,7 +1,7 @@
 import { View, Text, Pressable } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import * as Location from "expo-location";
-
+import * as Clipboard from "expo-clipboard";
 
 export default function Detaljer() {
     const { id } = useLocalSearchParams();
@@ -17,7 +17,15 @@ export default function Detaljer() {
                 console.log(position.coords);
             }}>
                 <Text>
+                    Hämta min plats
+                </Text>
+            </Pressable>
 
+            <Pressable onPress={() => {
+                Clipboard.setStringAsync(id as string);
+            }}>
+                <Text>
+                    Kopiera syssla
                 </Text>
             </Pressable>
         </View>
