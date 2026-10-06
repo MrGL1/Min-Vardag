@@ -1,8 +1,18 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
+import * as Clipboard from "expo-clipboard";
+import * as ScreenOrientation from "expo-screen-orientation";
+import { useEffect } from "react";
+
 
 export default function HomeScreen() {
   const { syssla, datum, tid } = useLocalSearchParams();
+
+  useEffect(() => {
+    ScreenOrientation.lockAsync(
+      ScreenOrientation.OrientationLock.PORTRAIT_UP
+    );
+  }, []);
 
   return (
     <View style={s.root}>
@@ -13,6 +23,12 @@ export default function HomeScreen() {
           <Text style={s.activity}>{syssla}</Text>
           <Text>Datum: {datum}</Text>
           <Text>Tid: {tid}</Text>
+
+          <Pressable onPress={() => {
+            Clipboard.setStringAsync(syssla as string);
+          }}>
+            <Text>Kopiera aktivitet</Text>
+          </Pressable>
         </View>
       )}
 
