@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Pressable } from "react-native";
+import { View, Text, TextInput, Pressable, StyleSheet } from "react-native";
 import { useState } from "react";
 import { router } from "expo-router";
 
@@ -9,40 +9,71 @@ export default function LaggTill() {
     const [tid, setTid] = useState("");
 
     return (
-        <View>
-            <Text>
+
+        <View style={s.root}>
+            <Text style={s.title}>
                 Lägg till syssla
             </Text>
 
             <TextInput
+                style={s.input}
                 value={syssla}
                 placeholder="Syssla"
                 onChangeText={setSyssla} />
 
             <TextInput
+                style={s.input}
                 placeholder="Datum"
                 value={datum}
                 onChangeText={setDatum}
             />
 
             <TextInput
+                style={s.input}
                 placeholder="Tid"
                 value={tid}
                 onChangeText={setTid}
             />
 
-            <Text onPress={() => {
-                router.push({
-                    pathname: "/",
-                    params: {
-                        syssla: syssla,
-                        datum: datum,
-                        tid: tid
-                    }
-                });
-            }}>
-                Lägg till
-            </Text>
+            <Pressable style={s.button}
+                onPress={() => {
+                    router.push({
+                        pathname: "/",
+                        params: {
+                            syssla: syssla,
+                            datum: datum,
+                            tid: tid
+                        }
+                    });
+                }}>
+                <Text>
+                    Lägg till
+                </Text>
+
+            </Pressable>
         </View>
     )
 }
+
+const s = StyleSheet.create({
+    root: {
+        flex: 1,
+        padding: 24,
+    },
+    input: {
+        borderWidth: 1,
+        padding: 10,
+        marginBottom: 12,
+        borderRadius: 8,
+    },
+    title: {
+        fontSize: 28,
+        fontWeight: "bold",
+        marginBottom: 20,
+    },
+    button: {
+        padding: 12,
+        borderWidth: 1,
+        borderRadius: 8,
+    },
+});

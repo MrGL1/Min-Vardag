@@ -1,12 +1,12 @@
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, StyleSheet } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 
 export default function HomeScreen() {
   const { syssla, datum, tid } = useLocalSearchParams();
 
   return (
-    <View>
-      <Text>Min Vardag </Text>
+    <View style={s.root}>
+      <Text style={s.title}>Min Vardag </Text>
       <Text>{syssla}</Text>
       <Text>{datum}</Text>
       <Text>{tid}</Text>
@@ -26,3 +26,16 @@ export default function HomeScreen() {
     </View>
   );
 }
+
+const s = StyleSheet.create({
+  root: {
+    flex: 1,
+    padding: 24,
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: "bold",
+    marginBottom: 20,
+  },
+
+})
