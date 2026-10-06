@@ -2,6 +2,7 @@ import { View, Text, TextInput, Pressable, StyleSheet } from "react-native";
 import { useState } from "react";
 import { router } from "expo-router";
 import * as Notifications from "expo-notifications";
+import * as Haptics from "expo-haptics";
 
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
@@ -49,7 +50,12 @@ export default function LaggTill() {
 
             <Pressable style={s.button}
                 onPress={async () => {
+                    await Haptics.notificationAsync(
+                        Haptics.NotificationFeedbackType.Success
+                    );
+
                     await Notifications.requestPermissionsAsync();
+
                     await Notifications.scheduleNotificationAsync({
                         content: {
                             title: "Min vardag",
