@@ -2,6 +2,7 @@ import { View, Text, Pressable } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import * as Location from "expo-location";
 import * as Clipboard from "expo-clipboard";
+import * as Battery from "expo-battery";
 
 export default function Detaljer() {
     const { id } = useLocalSearchParams();
@@ -26,6 +27,15 @@ export default function Detaljer() {
             }}>
                 <Text>
                     Kopiera syssla
+                </Text>
+            </Pressable>
+
+            <Pressable onPress={async () => {
+                const level = await Battery.getBatteryLevelAsync()
+                console.log(level);
+            }}>
+                <Text>
+                    Visa batterinivå
                 </Text>
             </Pressable>
         </View>
