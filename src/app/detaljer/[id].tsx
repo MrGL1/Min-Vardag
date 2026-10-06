@@ -31,7 +31,7 @@ export default function Detaljer() {
             </Pressable>
 
             <Pressable onPress={async () => {
-                const level = await Battery.getBatteryLevelAsync()
+                const level = await Battery.getBatteryLevelAsync();
                 console.log(level);
             }}>
                 <Text>
