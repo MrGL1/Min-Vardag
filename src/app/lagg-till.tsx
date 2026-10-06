@@ -1,6 +1,6 @@
 import { View, Text, TextInput, Pressable, StyleSheet } from "react-native";
 import { useState } from "react";
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import * as Notifications from "expo-notifications";
 import * as Haptics from "expo-haptics";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -15,6 +15,7 @@ Notifications.setNotificationHandler({
 })
 
 export default function LaggTill() {
+    const { titel } = useLocalSearchParams();
     const [syssla, setSyssla] = useState("");
     const [datum, setDatum] = useState("");
     const [tid, setTid] = useState("");
@@ -23,7 +24,7 @@ export default function LaggTill() {
 
         <View style={s.root}>
             <Text style={s.title}>
-                Lägg till aktivitet
+                {titel}
             </Text>
 
             <TextInput

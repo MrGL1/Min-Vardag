@@ -1,5 +1,5 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
-import { router, useLocalSearchParams } from "expo-router";
+import { router } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Clipboard from "expo-clipboard";
 import * as ScreenOrientation from "expo-screen-orientation";
@@ -12,6 +12,8 @@ type Aktivitet = {
 };
 
 export default function HomeScreen() {
+
+
   const [aktiviteter, setAktiviteter] = useState<Aktivitet[]>([]);
 
   const hamtaAktiviteter = async () => {
@@ -68,7 +70,12 @@ export default function HomeScreen() {
       < Pressable
         style={s.button}
         onPress={() => {
-          router.push("/lagg-till");
+          router.push({
+            pathname: "/lagg-till",
+            params: {
+              titel: "Ny aktivitet"
+            }
+          });
         }}>
         <Text>Lägg till Aktivitet</Text>
       </Pressable>
