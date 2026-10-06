@@ -3,7 +3,7 @@ import { router } from "expo-router";
 import * as Haptics from "expo-haptics";
 
 export default function Sysslor() {
-    const sysslor = ["Städa", "Träna", "Plugga"]
+    const sysslor = ["Städa", "Träna", "Plugga", "Promenad"]
     return (
         <View>
             <Text>Mina sysslor!</Text>
