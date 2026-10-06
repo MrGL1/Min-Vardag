@@ -1,7 +1,16 @@
 import { View, Text, TextInput, Pressable, StyleSheet } from "react-native";
 import { useState } from "react";
 import { router } from "expo-router";
+import * as Notifications from "expo-notifications";
 
+Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+        shouldShowBanner: true,
+        shouldShowList: true,
+        shouldPlaySound: true,
+        shouldSetBadge: false,
+    })
+})
 
 export default function LaggTill() {
     const [syssla, setSyssla] = useState("");
@@ -39,7 +48,18 @@ export default function LaggTill() {
             />
 
             <Pressable style={s.button}
-                onPress={() => {
+                onPress={async () => {
+                    await Notifications.requestPermissionsAsync();
+                    await Notifications.scheduleNotificationAsync({
+                        content: {
+                            title: "Min vardag",
+                            body: `Påminnelse:${syssla}`,
+                        },
+                        trigger: {
+                            type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
+                            seconds: 5,
+                        },
+                    });
                     router.push({
                         pathname: "/",
                         params: {
@@ -54,6 +74,8 @@ export default function LaggTill() {
                 </Text>
 
             </Pressable>
+
+
         </View>
     )
 }

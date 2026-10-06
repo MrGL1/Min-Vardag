@@ -2,19 +2,18 @@
 
 Min Vardag är en mobilapp skapad med React Native, Expo och TypeScript.
 
-Appen hjälper användaren att planera sin vardag genom att lägga till en syssla med datum och tid. Användaren kan även välja mellan olika typer av sysslor och öppna en detaljsida för en vald syssla.
+Appen hjälper användaren att planera sin vardag genom att lägga till aktiviteter med datum och tid i ett enkelt schema. Tanken är att användaren enkelt ska kunna hålla koll på saker som behöver göras och när de ska göras.
 
 ## Funktioner
 
-- Lägg till en syssla.
-- Ange datum för sysslan.
-- Ange tid för sysslan.
-- Visa den tillagda sysslan i ett enkelt schema.
-- Visa olika sysslor, exempelvis Städa, Träna, Plugga och Promenad.
+- Lägg till en aktivitet.
+- Ange datum för aktiviteten.
+- Ange tid för aktiviteten.
+- Visa den tillagda aktiviteten i ett enkelt schema.
 - Navigera mellan olika sidor med Expo Router.
-- Öppna en detaljsida för en vald syssla.
+- Visa en detaljsida för aktiviteter.
 - Hämta användarens position.
-- Kopiera namnet på en syssla.
+- Kopiera namnet på en aktivitet.
 - Visa enhetens batterinivå.
 - Ge haptisk feedback vid interaktion.
 
@@ -39,7 +38,7 @@ I projektet används bland annat följande React Native-komponenter:
 
 ## Expo SDK-moduler
 
-Projektet använder följande Expo SDK-moduler:
+Projektet använder fyra Expo SDK-moduler.
 
 ### Expo Haptics
 
@@ -51,7 +50,7 @@ Projektet använder följande Expo SDK-moduler:
 
 ### Expo Clipboard
 
-`expo-clipboard` används för att kopiera namnet på en vald syssla.
+`expo-clipboard` används för att kopiera namnet på en aktivitet.
 
 ### Expo Battery
 
@@ -59,20 +58,20 @@ Projektet använder följande Expo SDK-moduler:
 
 ## Navigering
 
-Appen använder Expo Router för navigering.
+Appen använder Expo Router för navigering mellan olika sidor.
 
-Exempel på sidor i appen:
+Exempel på routes som finns i projektet:
 
-- `/` – startsidan med schemat.
-- `/sysslor` – visar en lista med sysslor.
-- `/lagg-till` – formulär för att lägga till en syssla.
-- `/detaljer/[id]` – dynamisk detaljsida för en vald syssla.
+- `/` – startsidan där användarens schema visas.
+- `/lagg-till` – formulär där användaren kan lägga till en aktivitet med datum och tid.
+- `/sysslor` – sida med aktiviteter som skapades under utvecklingen av appen.
+- `/detaljer/[id]` – dynamisk detaljsida där information skickas med hjälp av en parameter.
 
-Den dynamiska routen `[id]` används för att skicka information om vilken syssla användaren har valt.
+Den dynamiska routen `[id]` används för att läsa en parameter med `useLocalSearchParams`.
 
 ## Installation
 
-Klona projektet och installera dependencies:
+Installera projektets dependencies:
 
 ```bash
 npm install
@@ -84,7 +83,7 @@ Starta sedan Expo:
 npx expo start
 ```
 
-Appen kan därefter köras med exempelvis Expo Go eller i webbläsaren.
+Appen kan därefter köras på en mobil enhet med Expo Go eller i webbläsaren.
 
 ## Projektstruktur
 
@@ -107,4 +106,6 @@ src/app/
 
 ## Syfte
 
-Syftet med projektet är att skapa en enkel vardagsapp där användaren kan planera aktiviteter och samtidigt använda centrala delar av React Native och Expo, såsom komponenter, state, navigering, dynamiska routes och Expo SDK-moduler.
+Syftet med Min Vardag är att skapa en enkel app som hjälper användaren att strukturera sin vardag och komma ihåg planerade aktiviteter.
+
+Projektet visar samtidigt användning av centrala delar av React Native och Expo, bland annat komponenter, `useState`, formulär, navigering, parametrar, dynamiska routes och Expo SDK-moduler.
