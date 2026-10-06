@@ -2,18 +2,20 @@
 
 Min Vardag är en mobilapp skapad med React Native, Expo och TypeScript.
 
-Appen hjälper användaren att planera sin vardag genom att lägga till aktiviteter med datum och tid i ett enkelt schema. Tanken är att användaren enkelt ska kunna hålla koll på saker som behöver göras och när de ska göras.
+Appen hjälper användaren att planera sin vardag genom att lägga till aktiviteter med datum och tid i ett enkelt schema. Användaren kan lägga till flera aktiviteter som sparas lokalt på enheten och finns kvar när användaren navigerar mellan appens sidor.
 
 ## Funktioner
 
-- Lägg till en aktivitet.
-- Ange datum för aktiviteten.
-- Ange tid för aktiviteten.
-- Visa den tillagda aktiviteten i ett enkelt schema.
-- Få en påminnelse genom en lokal notis.
-- Få haptisk feedback när en aktivitet läggs till.
+- Lägg till flera aktiviteter.
+- Ange datum för varje aktivitet.
+- Ange tid för varje aktivitet.
+- Visa aktiviteterna i ett enkelt schema.
+- Spara aktiviteter lokalt på enheten.
+- Ta bort aktiviteter från schemat.
 - Kopiera namnet på en aktivitet.
-- Appen hålls i stående skärmläge.
+- Få en lokal notis efter att en aktivitet har lagts till.
+- Få haptisk feedback när en aktivitet läggs till.
+- Hålla appen i stående skärmläge.
 - Navigera mellan startsidan och formuläret med Expo Router.
 
 ## Teknik
@@ -24,6 +26,7 @@ Projektet är byggt med:
 - Expo
 - TypeScript
 - Expo Router
+- AsyncStorage
 
 ## React Native-komponenter
 
@@ -33,6 +36,16 @@ I projektet används bland annat följande React Native-komponenter:
 - `Text`
 - `Pressable`
 - `TextInput`
+
+## State och lagring
+
+React `useState` används för att hantera aktiviteterna som visas på startsidan.
+
+Aktiviteterna sparas lokalt med `@react-native-async-storage/async-storage`. När användaren lägger till en ny aktivitet hämtas de tidigare sparade aktiviteterna och den nya aktiviteten läggs till i listan.
+
+När startsidan öppnas hämtas de sparade aktiviteterna från AsyncStorage och visas i schemat.
+
+Användaren kan även ta bort en aktivitet. Då uppdateras både listan på skärmen och den sparade listan i AsyncStorage.
 
 ## Expo SDK-moduler
 
@@ -62,10 +75,10 @@ Appen använder Expo Router för navigering mellan sidorna.
 
 Projektet har två huvudsakliga routes:
 
-- `/` – startsidan där användarens schema visas.
+- `/` – startsidan där användarens sparade aktiviteter visas.
 - `/lagg-till` – formuläret där användaren skriver aktivitet, datum och tid.
 
-När användaren lägger till en aktivitet skickas informationen tillbaka till startsidan och visas i schemat.
+När användaren lägger till en aktivitet sparas den med AsyncStorage. Därefter navigerar appen tillbaka till startsidan där aktiviteterna visas.
 
 ## Installation
 
@@ -101,12 +114,12 @@ src/app/
 └── lagg-till.tsx
 ```
 
-`index.tsx` innehåller startsidan och schemat.
+`index.tsx` innehåller startsidan. Där hämtas och visas de sparade aktiviteterna. Användaren kan även kopiera eller ta bort en aktivitet.
 
-`lagg-till.tsx` innehåller formuläret där användaren kan lägga till en ny aktivitet.
+`lagg-till.tsx` innehåller formuläret där användaren kan lägga till en ny aktivitet med datum och tid. Här sparas aktiviteten med AsyncStorage och appens notis och haptiska feedback aktiveras.
 
 ## Syfte
 
 Syftet med Min Vardag är att skapa en enkel app som hjälper användaren att strukturera sin vardag och komma ihåg planerade aktiviteter.
 
-Projektet visar samtidigt användning av centrala delar av React Native och Expo, bland annat komponenter, `useState`, formulär, navigering och Expo SDK-moduler.
+Projektet visar samtidigt användning av centrala delar av React Native och Expo, bland annat komponenter, `useState`, `useEffect`, formulär, arrayer, navigering, lokal lagring och Expo SDK-moduler.
